@@ -1,0 +1,1 @@
+export const USUARIOSISTEMA: number = 0;

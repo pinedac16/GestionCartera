@@ -1,0 +1,91 @@
+<!--Plantilla general para todas los componentes-->
+<p-growl [(value)]="msgs" life="8000"></p-growl>
+<div id="Loading" class="loading" style="display: none">
+  <div class="loader"></div>
+  <div class="loaderText">
+    <h4></h4>
+  </div>
+</div>
+<header class="encabezado">
+  <div class="container">
+    <div class="row">
+      <!--Logo de la master-->
+      <div class="col-md-4 col-lg-4 col-2">
+        <img class="logo" src="{{ 'Master_logo' | translate}}">
+      </div>
+      <div class="col-md-8 col-lg-8 col-10">
+        <div class="d-flex flex-row-reverse">
+          <!--Selección del idioma-->
+          <div style="padding: 2px">
+            <button type="button" (click)="switchLanguage('en')" pTooltip="English" tooltipPosition="bottom" class="btn btn-default btn-circle"
+              style="background-image:url(data:image/png;base64,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); background-repeat: no-repeat; background-size: 40px; background-position-y: -1px; background-position-x: -1px; opacity: 0.4;"></button>
+          </div>
+          <div style="padding: 2px">
+            <button type="button" (click)="switchLanguage('pt')" pTooltip="Portugués" tooltipPosition="bottom" class="btn btn-default btn-circle"
+              style="background-image:url(data:image/png;base64,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); background-repeat: no-repeat; background-size: 43px; background-position-y: -1px; background-position-x: -7px; opacity: 0.4"></button>
+          </div>
+          <div style="padding: 2px">
+            <button type="button" (click)="switchLanguage('es')" pTooltip="Español" tooltipPosition="bottom" class="btn btn-default btn-circle"
+              style="background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAhCAMAAACsowi2AAAAFVBMVEX/AAD//zP//zT/CQL/wCb/uCb/BwJ5v/yKAAAAMklEQVQ4jWNgGAW0B8wkAwYWkgEDE8mAgZFkMKplVAvNtZCRkllJBgxsJIOBLkdGBAAAI50G15VEGzwAAAAASUVORK5CYII=); background-repeat: no-repeat; background-size: 46px; background-position-y: -1px; background-position-x: -1px;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Barra del Menú-->
+  <div class="barra-menu">
+    <div class="container">
+      <p-menubar [model]="items" [autoDisplay]="false"></p-menubar>
+    </div>
+  </div>
+</header>
+<!--Contenedor de los componentes a mostar-->
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
+<!--Información del Footer-->
+<footer class="footer">
+  <div class="row">
+    <div class="col-md-1 col-lg-1 col-1">
+      &nbsp;
+    </div>
+    <div class="col-md-7 col-lg-4 col-7 info-footer">
+      <p translate>Master_footer_info_1</p>
+      <p translate>Master_footer_info_2</p>
+      <p translate>Master_footer_info_3</p>
+      <p translate>Master_footer_info_4</p>
+      <p translate>Master_footer_info_5</p>
+    </div>
+    <div class="col-md-2 col-lg-2 col-0 info-footer">
+      
+    </div>
+    <div class="col-md-2 col-12 col-0 redes-footer">
+      <p translate>Master_footer_info_6</p>
+      <p class="redes-footer1" translate>Master_footer_info_7</p>
+    </div>
+    <div class="col-md-4 col-lg-2 col-4 redes-footer">
+      <div class="row">
+        <div class="col-md-2 col-lg-2 col-2" style="padding-right: 0px;">
+          <a href="https://www.facebook.com/polijic/" target="_blank">
+            <img class="redesSocialesLogo" src="{{ 'Facebook_logo' | translate}}">
+          </a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-2" style="padding-right: 0px;">
+          <a href="https://twitter.com/politecnicoJIC" target="_blank">
+            <img class="redesSocialesLogo" src="{{ 'Twitter_logo' | translate}}">
+          </a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-2" style="padding-right: 0px;">
+          <a href="https://www.instagram.com/politecnicojic/?hl=es-la" target="_blank">
+            <img class="redesSocialesLogo" src="{{ 'Instagram_logo' | translate}}">
+          </a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-2" style="padding-right: 0px;">
+          <a href="https://www.youtube.com/channel/UCLSaxR0qrhvgCg2SUVW84FQ/videos" target="_blank">
+            <img class="redesSocialesLogo" src="{{ 'Youtube_logo' | translate}}">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

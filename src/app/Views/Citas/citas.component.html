@@ -1,0 +1,178 @@
+<p-growl [(value)]="msgs" life="8000"></p-growl>
+
+<div id="modalCitas" class="modal fade in" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>
+                        <i class="fas fa-users"></i> {{ 'Citas_Titulo' | translate}}
+                    </span>
+                </h4>
+                <button type="button" (click)="clearModalForm()" class="close" data-dismiss="modal" #closeAddExpenseModal>&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="frmCitas" class="form-1">
+                    <div>
+                        <label id="lblObjetivo" for="txtObjetivo" class="fl-label" translate>Citas_modal_Objetivo</label>
+                        <input type="textarea" id='txtObjetivo' name="txtObjetivo" class="fl-input required" />
+                        <p class="has-error">{{ 'General_Msg_Requerido' | translate}}</p>
+                    </div>
+                    <div>
+                        <label id="lblFecha" for="txtFecha" class="fl-label" translate>Citas_modal_Fecha</label>
+                        <input type="datetime-local" id='txtFecha' name="txtFecha" class="fl-input required" />
+                        <p class="has-error">{{ 'General_Msg_Requerido' | translate}}</p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div *ngIf="editCita">
+                    <button id="btnActualizar" type="button" class="btn btn-ISA" (click)="Editar()">{{ 'Citas_modal_btnActualizar' | translate}}</button>
+                </div>
+                <div *ngIf="!editCita">
+                    <button id="btnRegistrar" type="button" class="btn btn-ISA" (click)="Registrar()">{{ 'Citas_modal_btnRegistrar' | translate}}</button>
+                </div>
+                <button type="button" class="btn btn-danger" (click)="clearModalForm()" data-dismiss="modal" translate>Citas_modal_btnCancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalSeguimiento" class="modal fade in" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>
+                        <i class="fas fa-users"></i> {{ 'Citas_TituloSeg' | translate}}
+                    </span>
+                </h4>
+                <button type="button" (click)="clearModalFormInt()" class="close" data-dismiss="modal" #closeAddExpenseModalSeg>&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="frmSeguimiento" class="form-1">
+                    <div>
+                        <label id="lblObjetivoSeg" for="txtObjetivoSeg" class="fl-label" translate>Citas_modal_Objetivo</label>
+                        <input type="textarea" id='txtObjetivoSeg' name="txtObjetivoSeg" disabled />
+                    </div>
+                    <div>
+                        <label id="lblFechaSeg" for="txtFechaSeg" class="fl-label" translate>Citas_modal_Fecha</label>
+                        <input type="datetime-local" id='txtFechaSeg' name="txtFechaSeg" class="fl-input required" disabled/>
+                        <p class="has-error">{{ 'General_Msg_Requerido' | translate}}</p>
+                    </div>
+                    <div>
+                        <label id="lblResultado" for="txtResultado" class="fl-label" translate>Citas_modal_Resutado</label>
+                        <input type="textarea" id='txtResultado' name="txtResultado" class="fl-input required" />
+                        <p class="has-error">{{ 'General_Msg_Requerido' | translate}}</p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btnCompletar" type="button" class="btn btn-ISA" (click)="Completar()">{{ 'Citas_modal_btnCompletar' | translate}}</button>
+                <button type="button" class="btn btn-danger" (click)="clearModalFormSeg()" data-dismiss="modal" translate>Citas_modal_btnCancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalCompletado" class="modal fade in" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>
+                        <i class="fas fa-users"></i> {{ 'Citas_TituloCom' | translate}}
+                    </span>
+                </h4>
+                <button type="button" (click)="clearModalFormInt()" class="close" data-dismiss="modal" #closeAddExpenseModalCom>&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="frmCompletado" class="form-1">
+                    <div>
+                        <label id="lblObjetivoCom" for="txtObjetivoCom" class="fl-label" translate>Citas_modal_Objetivo</label>
+                        <input type="textarea" id='txtObjetivoCom' name="txtObjetivoCom" disabled />
+                    </div>
+                    <div>
+                        <label id="lblFechaCom" for="txtFechaCom" class="fl-label" translate>Citas_modal_Fecha</label>
+                        <input type="datetime-local" id='txtFechaCom' name="txtFechaCom" class="fl-input required" disabled/>
+                        <p class="has-error">{{ 'General_Msg_Requerido' | translate}}</p>
+                    </div>
+                    <div>
+                        <label id="lblResultadoCom" for="txtResultadoCom" class="fl-label" translate>Citas_modal_Resutado</label>
+                        <input type="textarea" id='txtResultadoCom' name="txtResultadoCom" disabled />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="clearModalFormCom()" data-dismiss="modal" translate>Citas_modal_btnCancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-confirmDialog></p-confirmDialog>
+
+<div class="container">
+    <div class="row" style="padding-left: 0px">
+        <div class="col-md-5 col-lg-5 col-12">
+            <h3>
+                <i class="fas fa-users"></i> {{'Citas_Titulo' | translate}}
+            </h3>
+            <p class="text-justify">{{'Citas_Texto' | translate}}</p>
+        </div>
+        <button #openModalSeg type="button" class="btn btn-ISA" data-toggle="modal" data-target="#modalSeguimiento"
+            data-backdrop="static" data-keyboard="false" style="display: none"></button>
+        <button #openModal type="button" class="btn btn-ISA" data-toggle="modal" data-target="#modalCitas"
+            data-backdrop="static" data-keyboard="false" style="display: none"></button>
+        <button #openModalCom type="button" class="btn btn-ISA" data-toggle="modal" data-target="#modalCompletado"
+            data-backdrop="static" data-keyboard="false" style="display: none"></button>
+        <div class="col-md-7 col-lg-7 col-12">
+                &nbsp;
+            </div>
+        <div class="col-md-12">&nbsp;
+            <div id="spLoading" class="loader2"></div>
+        </div>
+        <div id="dvTable" style="display: none" class="col-md-12">
+            <table id="tblLista" datatable style="width: 100%" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped compact hover">
+                <thead>
+                    <tr>
+                        <th>{{'Citas_tblLista_numeroFac' | translate}}</th>
+                        <th>{{'Citas_tblLista_Cliente' | translate}}</th>
+                        <th>{{'Citas_tblLista_Fecha' | translate}}</th>
+                        <th>{{'Citas_tblLista_Descripcion' | translate}}</th>
+                        <th>{{'Citas_tblLista_Valor' | translate}}</th>
+                        <th>{{'Citas_tblLista_Estado' | translate}}</th>
+                        <th>{{'Citas_tblLista_Acciones' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let lst of ListaFacturas;">
+                        <td>{{lst.Numero}}</td>
+                        <td>{{lst.Cliente}}</td>
+                        <td>{{lst.Fecha}}</td>
+                        <td>{{lst.Descripcion}}</td>
+                        <td>{{lst.Valor}}</td>
+                        <td>{{lst.Estado}}</td>
+                        <td style="text-align: center; width: 10%">
+                            <span *ngIf="lst.Estado == 'Sin cita'">
+                                <i (click)="createCitas(lst.Id)" class="far fa-calendar-alt button-grid" tooltipPosition="right" pTooltip="{{ 'Citas_Crear_Cita' | translate }}"></i>&nbsp;
+                            </span>
+                            <span *ngIf="lst.Estado == 'Con cita'">
+                                <i (click)="editCitas(lst.Id)" class="far fa-calendar-alt button-grid" tooltipPosition="right" pTooltip="{{ 'Citas_Editar_Cita' | translate }}"></i>&nbsp;
+                            </span>
+                            <span *ngIf="lst.Estado == 'Con cita'">
+                                <i (click)="crearResultado(lst.Id)" class="fas fa-edit button-grid" style="color: green" tooltipPosition="right" pTooltip="{{ 'Citas_Resultado' | translate }}"></i>&nbsp;
+                            </span>
+                            <span *ngIf="lst.Estado == 'Completado'">
+                                <i (click)="VerInfo(lst.Id)" class="fas fa-check-circle button-grid" style="color: green" tooltipPosition="right" pTooltip="{{ 'Citas_Completado' | translate }}"></i>&nbsp;
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

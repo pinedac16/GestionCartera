@@ -1,0 +1,427 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+
+@media only screen and (max-width: 991px) {
+  .col-0 {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .titulo-Principal {
+    line-height: 1em !important;
+  }
+
+  .info-footer {
+    margin-top: 30px !important;
+    font-size: 0.5em !important;
+    line-height: 0.1em  !important;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .logo {
+    width: 150px;
+  }
+
+  .info-footer {
+    margin-top: 30px !important;
+    font-size: 0.4em !important;
+    line-height: 0.1em  !important;
+  }
+
+  .redes-footer {
+    font-size: 0.5em;
+  }
+}
+
+/* .ui-menuitem .ui-menuitem-link {
+  color: #fff !important;
+} */
+
+.form-control-grid {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.ui-menu-parent>.ui-menuitem-link {
+  color: #000 !important;
+}
+
+.ui-menubar-root-list>li>a>span {
+  color: #fff !important;
+}
+
+.ui-menu .ui-menuitem > .ui-menuitem-link:hover,
+.ui-menubar .ui-menuitem > .ui-menuitem-link:hover,
+.ui-tieredmenu .ui-menuitem > .ui-menuitem-link:hover,
+.ui-slidemenu .ui-menuitem > .ui-menuitem-link:hover,
+.ui-contextmenu .ui-menuitem > .ui-menuitem-link:hover,
+.ui-megamenu .ui-menuitem > .ui-menuitem-link:hover {
+  background-color: #1976d2 !important;
+}
+
+.ui-menu .ui-menuitem.ui-menuitem-active > .ui-menuitem-link,
+.ui-menubar .ui-menuitem.ui-menuitem-active > .ui-menuitem-link,
+.ui-tieredmenu .ui-menuitem.ui-menuitem-active > .ui-menuitem-link,
+.ui-slidemenu .ui-menuitem.ui-menuitem-active > .ui-menuitem-link,
+.ui-contextmenu .ui-menuitem.ui-menuitem-active > .ui-menuitem-link,
+.ui-megamenu .ui-menuitem.ui-menuitem-active > .ui-menuitem-link {
+  background-color: #1976d2 !important;
+}
+
+.ui-menubar {
+  background: #003087 !important;
+  padding: 0px !important;
+}
+
+.ui-menubar .ui-menubar-root-list>.ui-menuitem>.ui-menuitem-link {
+  padding: 0.3em !important;
+  padding-right: 10px !important;
+  padding-left: 10px !important;
+}
+
+.ui-widget-content {
+  border: 0px !important;
+}
+
+.label-primary {
+  font-weight: bold !important;
+  font-size: 0.8em !important;
+}
+
+.titulo-Principal {
+  line-height: 0.8em;
+  color: #0099ff;
+  font-weight: bold
+}
+
+.ui-fileupload-row>div {
+  font-size: 0.8em !important;
+}
+
+.has-error {
+  color: #dc3545;
+  font-size: 0.68em;
+  margin-top: -20px;
+  margin-left: 2px;
+  display: none;
+}
+
+.has-error-people-picker {
+  color: #dc3545;
+  font-size: 0.68em;
+  margin-top: 3px;
+  margin-left: 2px;
+}
+
+table.dataTable.compact tbody th, table.dataTable.compact tbody td{
+  font-size: 0.8em;
+}
+
+.userName {
+  margin-bottom: 0px;
+  font-size: 0.75em;
+  font-weight: bold;
+  margin-top: 50px;
+}
+
+body{
+  overflow-x: hidden;
+  font-family: 'Open Sans', sans-serif !important;
+}
+
+.content {
+  min-height: calc(100vh - 375px);
+}
+
+.footer {
+  margin-top: 60px;
+  height: 150px;
+  background-color: #003087;
+}
+
+.info-footer {
+  color: #ffffff;
+  margin-top: 30px;
+  font-size: 0.7em;
+  line-height: 0.3em;
+}
+
+.redes-footer {
+  color: #ffffff;
+  margin-top: 60px;
+  line-height: 0.3em;
+  font-size: 0.7em;
+}
+
+.redes-footer1 {
+  font-size: 1.5em
+}
+
+.barra-menu {
+  background: #003087;
+  height: 35px;
+  margin: 0px 0px 0px 0px;
+}
+
+.encabezado {
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 165px;
+}
+
+.button-grid {
+  font-size: 1.2em;
+  cursor:pointer;
+  color: #003087;
+}
+
+.list-group-item:hover {
+  background-color: aliceblue !important;
+}
+
+.person.highlight {
+  background: #003087 !important;
+}
+
+.input-person > input {
+  padding: 2px 6px !important;
+}
+
+.fl-has-focus-picker ul[class=peoplePickerTags] {
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-color: #1976d2 !important;
+}
+
+table.dataTable thead th, table.dataTable thead td {
+  border-bottom: 2px solid #ddd !important;
+}
+
+table.dataTable.no-footer {
+  border-bottom: none !important;
+}
+
+table.dataTable th {
+  border-top: none !important;
+}
+
+button {
+    min-width: 0em !important;
+}
+
+.btn-Excel {
+  padding: 3px 8px !important;
+}
+
+.btn-ISA {
+    color: #FFFFFF; 
+    background-color: #003087; 
+    border-color: #003087; 
+  }
+   
+  .btn-ISA:hover, 
+  .btn-ISA:focus, 
+  .btn-ISA:active, 
+  .btn-ISA.active, 
+  .open .dropdown-toggle.btn-ISA { 
+    color: #FFFFFF; 
+    background-color: #0099FF; 
+    border-color: #0099FF; 
+  } 
+   
+  .btn-ISA:active, 
+  .btn-ISA.active, 
+  .open .dropdown-toggle.btn-ISA { 
+    background-image: none; 
+  } 
+   
+  .btn-ISA.disabled, 
+  .btn-ISA[disabled], 
+  fieldset[disabled] .btn-ISA, 
+  .btn-ISA.disabled:hover, 
+  .btn-ISA[disabled]:hover, 
+  fieldset[disabled] .btn-ISA:hover, 
+  .btn-ISA.disabled:focus, 
+  .btn-ISA[disabled]:focus, 
+  fieldset[disabled] .btn-ISA:focus, 
+  .btn-ISA.disabled:active, 
+  .btn-ISA[disabled]:active, 
+  fieldset[disabled] .btn-ISA:active, 
+  .btn-ISA.disabled.active, 
+  .btn-ISA[disabled].active, 
+  fieldset[disabled] .btn-ISA.active { 
+    background-color: #003087; 
+    border-color: #003087; 
+  } 
+   
+  .btn-ISA .badge { 
+    color: #003087; 
+    background-color: #FFFFFF; 
+  }
+
+
+  /* Stilo para el loading 2*/
+.loader2,
+.loader2:before,
+.loader2:after {
+  border-radius: 50%;
+}
+.loader2 {
+  color: #003087;
+  font-size: 4px;
+  text-indent: -99999em;
+  margin: 0px auto;
+  margin-bottom: 20px;
+  position: relative;
+  width: 10em;
+  height: 10em;
+  box-shadow: inset 0 0 0 1em;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loader2:before,
+.loader2:after {
+  position: absolute;
+  content: '';
+}
+.loader2:before {
+  width: 5.2em;
+  height: 10.2em;
+  background: #fff;
+  border-radius: 10.2em 0 0 10.2em;
+  top: -0.1em;
+  left: -0.1em;
+  -webkit-transform-origin: 5.2em 5.1em;
+  transform-origin: 5.2em 5.1em;
+  -webkit-animation: load2 1.2s infinite ease 0.9s;
+  animation: load2 1.2s infinite ease 0.9s;
+}
+.loader2:after {
+  width: 5.2em;
+  height: 10.2em;
+  background: #fff;
+  border-radius: 0 10.2em 10.2em 0;
+  top: -0.1em;
+  left: 5.1em;
+  -webkit-transform-origin: 0px 5.1em;
+  transform-origin: 0px 5.1em;
+  -webkit-animation: load2 1.2s infinite ease;
+  animation: load2 1.2s infinite ease;
+}
+@-webkit-keyframes load2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+/* Stilo para el loading*/
+.loader,
+.loader:before,
+.loader:after {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation: load7 1.8s infinite ease-in-out;
+  animation: load7 1.8s infinite ease-in-out;
+}
+.loader {
+  color: #003087;
+  font-size: 10px;
+  margin: auto;
+  position: absolute;
+  top: -30%;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  /* text-indent: -9999em; */
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+.loaderText {
+  margin: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  color: #003087;
+}
+
+.loader:before,
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+.loader:before {
+  left: -3.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 3.5em;
+}
+@-webkit-keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0;
+  }
+}
+@keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0;
+  }
+}
+
+.loading {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(255,255,255,0.7);
+  z-index: 10000;
+}

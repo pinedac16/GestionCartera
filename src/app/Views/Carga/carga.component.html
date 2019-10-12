@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row" style="padding-left: 0px">
+      <div class="col-md-5 col-lg-5 col-12">
+          <h3>
+          <i class="far fa-file-alt"></i> {{'Carga_Titulo' | translate}}</h3>
+          <p class="text-justify">{{'Carga_Texto' | translate}}</p>
+      </div>
+      <div class="col-md-1 col-lg-1 col-12">
+          &nbsp;
+      </div>
+      <div class="col-md-6 col-lg-6 col-12">
+          <h3>
+              <i class="fas fa-cloud-download-alt"></i> {{'Carga_TituloPlantilla' | translate}}</h3>
+          <p class="text-justify">{{'Carga_TextoPlantilla' | translate}}</p>
+          <div class="col-md-12 col-lg-12 col-0">
+          </div>
+          <button type="button" (click)="getTemplate()" class="btn btn-ISA">
+              <i class="fas fa-cloud-download-alt"></i> {{'Carga_BotonPlantilla' | translate}}</button>
+      </div>
+      
+      <div class="col-md-12">&nbsp;</div>
+      <div>
+        <form id="frmRegistroIdea" class="form-1">
+          <div style="padding: 15px 0px;">
+                <p-fileUpload #fileUpload mode="advanced" name="archivo[]" customUpload="true" maxFileSize="20000000" auto="true" (uploadHandler)="onBasicUpload($event)"
+                    chooseLabel="{{ 'Carga_Anexar_Documento' | translate }}" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    invalidFileTypeMessageSummary="{{ 'Carga_Tipo_Archivo_Invalido_Summary' | translate }}" invalidFileTypeMessageDetail="{{ 'Carga_Tipo_Archivo_Invalido_Detail' | translate }}"
+                    invalidFileSizeMessageSummary="{{ 'Carga_Peso_Archivo_Invalido_Summary' | translate }}" invalidFileSizeMessageDetail="{{ 'Carga_Peso_Archivo_Invalido_Detail' | translate }}"></p-fileUpload>
+                <p id="valFile" class="has-error-people-picker" style="display: none">{{ 'General_Msg_Requerido' | translate}}</p>
+          </div>
+        </form>
+        <div class="row" style="padding-left: 0px">
+            <div class="col-md-2 col-lg-3 col-12">
+                <button id="btnRegistrar" type="button" class="btn btn-ISA" (click)="Cargar()">{{ 'Carga_btnRegistrar' | translate}}</button>&nbsp;
+            </div>
+            <div class="col-md-2 col-lg-3 col-12" *ngIf="uploadedFile !== null">
+                <button type="button" class="btn btn-danger" (click)="clear()" translate>Carga_btnCancelar</button>
+            </div>
+            <div class="col-md-8 col-lg-6 col-12">
+    
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
