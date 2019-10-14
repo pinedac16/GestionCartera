@@ -1,0 +1,12 @@
+<div class="chart-container">
+  <google-chart #gchart [data]="chartDataAndOptions" (chartError)="error($event)"
+    (chartSelect)="select($event)"></google-chart>
+
+  <div class="chart-legend-container" *ngIf="legends">
+    <span class="chart-legend" *ngFor="let legend of legends">
+      <span [style.color]="legend.color" class="bullet-icon-legend"></span>
+      {{legend.label}}
+    </span>
+  </div>
+
+</div>

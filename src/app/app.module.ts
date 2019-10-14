@@ -27,7 +27,7 @@ import { CargaComponent } from './Views/Carga/carga.component';
 import { CitasComponent } from './Views/Citas/citas.component';
 import { ReportesComponent } from './Views/Reportes/reportes.component';
 import { InformesComponent } from './Views/Informes/informes.component';
-import { ProcesosComponent } from './Views/procesos/procesos.component';
+import { ChartsModule } from './modules/charts/charts.module';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -58,10 +58,6 @@ const routes: Routes = [
   {
     path: 'Informes',
     component: InformesComponent
-  },
-  {
-    path: 'Procesos',
-    component: ProcesosComponent
   }
 ];
 
@@ -72,8 +68,7 @@ const routes: Routes = [
     CargaComponent,
     CitasComponent,
     ReportesComponent,
-    InformesComponent,
-    ProcesosComponent
+    InformesComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +83,7 @@ const routes: Routes = [
     MenubarModule,
     FormsModule,
     ReactiveFormsModule,
+    ChartsModule,
     RouterModule.forRoot(routes, {useHash: true}),
     TranslateModule.forChild({
       loader: {
