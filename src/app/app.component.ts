@@ -4,6 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Globals } from '../globals';
 import { format } from 'util';
 import { Message, MenuItem } from 'primeng/api';
+import { CargaService } from './Services/Carga/carga.service';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +16,12 @@ export class AppComponent {
   msgs: Message[] = [];
   items: MenuItem[];
 
-  constructor(private translate: TranslateService, 
-              private router: Router, 
-              private globals: Globals) {
+  constructor(
+    private translate: TranslateService,
+    private router: Router,
+    private globals: Globals,
+    private carga: CargaService
+  ) {
 
     //Se setena los lenguajes y el lenguaje por defecto [es]
     translate.langs = ['es', 'en', 'pt'];
@@ -65,8 +69,8 @@ export class AppComponent {
 
     this.items = [
       {
-        label: 'Inicio',
-        routerLink: '/Principal',
+        label: '',
+        routerLink: '/Login',
       }
     ];
   }
@@ -79,19 +83,20 @@ export class AppComponent {
       this.showLoading(msg);
       this.getTraducsPpal();
       this.hideLoading();
-      this.router.navigate(['/Principal']);
+      this.router.navigate(['/login']);
     });
 
   }
 
   //Metodo para traer los items del menú
-  getMenu(): void{
+  getMenu(): void {
     this.translate.get('Menu_Inicio').subscribe(msg => {
         this.items = [
           { label: msg, routerLink: '/Principal'},
           { label: this.translate.instant('Menu_Carga'), routerLink: '/Carga' },
           { label: this.translate.instant('Menu_Reportes'), routerLink: '/Reportes' },
-          { label: this.translate.instant('Menu_Citas'), routerLink: '/Citas' }
+          { label: this.translate.instant('Menu_Citas'), routerLink: '/Citas' },
+          { label: 'Salir', routerLink: '/Logout' }
         ];
     });
   }

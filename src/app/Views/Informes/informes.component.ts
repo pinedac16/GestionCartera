@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CargaService } from '../../Services/Carga/carga.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-informes',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InformesComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private carga: CargaService
+  ) { }
 
   ngOnInit() {
+    if (!this.carga.isLogin) {
+      this.router.navigate(['/Login']);
+    }
   }
 
 }

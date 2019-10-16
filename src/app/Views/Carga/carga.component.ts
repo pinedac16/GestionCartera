@@ -36,9 +36,15 @@ export class CargaComponent implements OnInit {
     private translate: TranslateService,
     private router: Router,
     private confirmationService: ConfirmationService,
-    private RequestService: UtilService) { }
+    private RequestService: UtilService,
+    private carga: CargaService,
+    ) { }
 
   ngOnInit() {
+
+    if (!this.carga.isLogin) {
+      this.router.navigate(['/Login']);
+    }
 
     $(document).ready(function () {
       $('.required').on('change keyup blur', function() {

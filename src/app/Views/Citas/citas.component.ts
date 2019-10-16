@@ -11,6 +11,7 @@ import { format } from 'util';
 import { CitasService } from "../../Services/Citas/citas.service";
 import { UtilService } from '../../Services/Util/util.service';
 import { Paths } from '../../class/const/paths';
+import { CargaService } from '../../Services/Carga/carga.service';
 
 declare var FloatLabels: any;
 
@@ -50,9 +51,13 @@ export class CitasComponent implements OnInit {
     private globals: Globals,
     private confirmationService: ConfirmationService,
     private citasService: CitasService,
-    private RequestService: UtilService) { }
+    private RequestService: UtilService,
+    private carga: CargaService) { }
 
   ngOnInit() {
+    if (!this.carga.isLogin) {
+      this.router.navigate(['/Login']);
+    }
 
     this.translate.get('Citas_Mensaje_Confirmacion_Borrar').subscribe(msg => {
       this.globals.MensajeConfirmBorrado = msg;

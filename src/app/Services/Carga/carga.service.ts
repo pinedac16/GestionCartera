@@ -5,5 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class CargaService {
 
+  isLogin = false;
+  name = '';
+
   constructor() { }
 }
