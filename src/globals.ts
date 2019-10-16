@@ -8,6 +8,7 @@ export class Globals{
     MsgError: string;
     TituloConfirmBorrado: string;
     MensajeConfirmBorrado: string;
+    BtnAceptar: string;
     BtnSi: string;
     BtnNo: string;
     

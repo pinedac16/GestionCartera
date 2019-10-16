@@ -37,15 +37,23 @@ export class Cita {
     fecha: string;
     resultado: string;
     idFactura: string;
+    observaciones: string;
+}
+
+export class Proceso {
+    id: number;
+    observaciones: string;
+    idFactura: string;
 }
 
 export class Factura {
-    Id: number;
-    Numero: String;
-    Fecha: String;
-    Descripcion: string;
-    Valor: string;
-    Cliente: string;
+    id: number;
+    numero: String;
+    fecha: String;
+    descripcion: string;
+    valor: string;
+    idCliente: string;
+    Pago: string;
     Estado: string;
 }
 

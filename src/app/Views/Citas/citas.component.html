@@ -24,6 +24,11 @@
                         <input type="datetime-local" id='txtFecha' name="txtFecha" class="fl-input required" />
                         <p class="has-error">{{ 'General_Msg_Requerido' | translate}}</p>
                     </div>
+                    <div >
+                        <label id="lblObservaciones" for="txtObservaciones" class="fl-label" translate>Citas_modal_Observaciones</label>
+                        <input type="textarea" id='txtObservaciones' name="txtObservaciones" class="fl-input required" />
+                        <p class="has-error">{{ 'General_Msg_Requerido' | translate}}</p>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -63,6 +68,10 @@
                         <p class="has-error">{{ 'General_Msg_Requerido' | translate}}</p>
                     </div>
                     <div>
+                        <label id="lblObservacionesSeg" for="txtObservacionesSeg" class="fl-label" translate>Citas_modal_Observaciones</label>
+                        <input type="textarea" id='txtObservacionesSeg' name="txtObservacionesSeg" disabled />
+                    </div>
+                    <div>
                         <label id="lblResultado" for="txtResultado" class="fl-label" translate>Citas_modal_Resutado</label>
                         <input type="textarea" id='txtResultado' name="txtResultado" class="fl-input required" />
                         <p class="has-error">{{ 'General_Msg_Requerido' | translate}}</p>
@@ -70,6 +79,7 @@
                 </form>
             </div>
             <div class="modal-footer">
+                <button id="btnProceso" type="button" class="btn btn-ISA" (click)="Proceso()">{{ 'Citas_modal_btnProceso' | translate}}</button>
                 <button id="btnCompletar" type="button" class="btn btn-ISA" (click)="Completar()">{{ 'Citas_modal_btnCompletar' | translate}}</button>
                 <button type="button" class="btn btn-danger" (click)="clearModalFormSeg()" data-dismiss="modal" translate>Citas_modal_btnCancelar</button>
             </div>
@@ -99,6 +109,10 @@
                         <label id="lblFechaCom" for="txtFechaCom" class="fl-label" translate>Citas_modal_Fecha</label>
                         <input type="datetime-local" id='txtFechaCom' name="txtFechaCom" class="fl-input required" disabled/>
                         <p class="has-error">{{ 'General_Msg_Requerido' | translate}}</p>
+                    </div>
+                    <div>
+                        <label id="lblObservacionesCom" for="txtObservacionesCom" class="fl-label" translate>Citas_modal_Observaciones</label>
+                        <input type="textarea" id='txtObservacionesCom' name="txtObservacionesCom" disabled />
                     </div>
                     <div>
                         <label id="lblResultadoCom" for="txtResultadoCom" class="fl-label" translate>Citas_modal_Resutado</label>
@@ -150,11 +164,11 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let lst of ListaFacturas;">
-                        <td>{{lst.Numero}}</td>
-                        <td>{{lst.Cliente}}</td>
-                        <td>{{lst.Fecha}}</td>
-                        <td>{{lst.Descripcion}}</td>
-                        <td>{{lst.Valor}}</td>
+                        <td>{{lst.numero}}</td>
+                        <td>{{lst.idCliente}}</td>
+                        <td>{{lst.fecha}}</td>
+                        <td>{{lst.descripcion}}</td>
+                        <td>{{lst.valor}}</td>
                         <td>{{lst.Estado}}</td>
                         <td style="text-align: center; width: 10%">
                             <span *ngIf="lst.Estado == 'Sin cita'">
@@ -166,7 +180,7 @@
                             <span *ngIf="lst.Estado == 'Con cita'">
                                 <i (click)="crearResultado(lst.Id)" class="fas fa-edit button-grid" style="color: green" tooltipPosition="right" pTooltip="{{ 'Citas_Resultado' | translate }}"></i>&nbsp;
                             </span>
-                            <span *ngIf="lst.Estado == 'Completado'">
+                            <span *ngIf="lst.Estado == 'Completado' || lst.Estado == 'Proceso juridico iniciado' || lst.Estado == 'Proceso juridico completado'">
                                 <i (click)="VerInfo(lst.Id)" class="fas fa-check-circle button-grid" style="color: green" tooltipPosition="right" pTooltip="{{ 'Citas_Completado' | translate }}"></i>&nbsp;
                             </span>
                         </td>

@@ -30,6 +30,7 @@ import { InformesComponent } from './Views/Informes/informes.component';
 import { ChartsModule } from './modules/charts/charts.module';
 import { LoginComponent } from './Views/login/login.component';
 import { LogoutComponent } from './Views/logout/logout.component';
+import { ProcesoJuridicoComponent } from './Views/ProcesoJuridico/proceso-juridico.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -71,6 +72,10 @@ const routes: Routes = [
     component: InformesComponent
   },
   {
+    path: 'Procesos',
+    component: ProcesoJuridicoComponent
+  },
+  {
     path: '**',
     redirectTo: 'Login',
     pathMatch: 'full'
@@ -86,7 +91,8 @@ const routes: Routes = [
     ReportesComponent,
     InformesComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    ProcesoJuridicoComponent
   ],
   imports: [
     BrowserModule,
