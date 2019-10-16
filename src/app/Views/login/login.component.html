@@ -29,8 +29,21 @@
       <input type="password" class="form-control" name="password" [(ngModel)]="password" id="exampleInputPassword1" placeholder="Contraseña ">
     </div>
     <br>
-    <button type="submit" (click)="login()" class="btn btn-primary" [disabled]="isLoading">Enviar</button>
+    <div class="row" style="padding-left: 0px">
+      <div class="col-md-2 col-lg-3 col-12">
+        <button type="submit" (click)="login()" class="btn btn-ISA" [disabled]="isLoading">Ingresar</button>&nbsp;
+      </div>
+      <div class="col-md-2 col-lg-3 col-12" *ngIf="this.username != null">
+        <button id="btnRecordar" type="button" class="btn btn-ISA" (click)="recordarContrasena()">Recordar contraseña</button>
+      </div>
+      <div class="col-md-8 col-lg-6 col-12">
+
+      </div>
+    </div>
+    
   </form>
+
+  <p-confirmDialog></p-confirmDialog>
 
   <div class="col-md-12" *ngIf="isLoading">&nbsp;
     <div id="spLoading" class="loader2"></div>

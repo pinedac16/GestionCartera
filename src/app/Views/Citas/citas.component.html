@@ -172,16 +172,16 @@
                         <td>{{lst.Estado}}</td>
                         <td style="text-align: center; width: 10%">
                             <span *ngIf="lst.Estado == 'Sin cita'">
-                                <i (click)="createCitas(lst.Id)" class="far fa-calendar-alt button-grid" tooltipPosition="right" pTooltip="{{ 'Citas_Crear_Cita' | translate }}"></i>&nbsp;
+                                <i (click)="createCitas(lst.id)" class="far fa-calendar-alt button-grid" tooltipPosition="right" pTooltip="{{ 'Citas_Crear_Cita' | translate }}"></i>&nbsp;
                             </span>
                             <span *ngIf="lst.Estado == 'Con cita'">
-                                <i (click)="editCitas(lst.Id)" class="far fa-calendar-alt button-grid" tooltipPosition="right" pTooltip="{{ 'Citas_Editar_Cita' | translate }}"></i>&nbsp;
+                                <i (click)="editCitas(lst.id)" class="far fa-calendar-alt button-grid" tooltipPosition="right" pTooltip="{{ 'Citas_Editar_Cita' | translate }}"></i>&nbsp;
                             </span>
                             <span *ngIf="lst.Estado == 'Con cita'">
-                                <i (click)="crearResultado(lst.Id)" class="fas fa-edit button-grid" style="color: green" tooltipPosition="right" pTooltip="{{ 'Citas_Resultado' | translate }}"></i>&nbsp;
+                                <i (click)="crearResultado(lst.id)" class="fas fa-edit button-grid" style="color: green" tooltipPosition="right" pTooltip="{{ 'Citas_Resultado' | translate }}"></i>&nbsp;
                             </span>
                             <span *ngIf="lst.Estado == 'Completado' || lst.Estado == 'Proceso juridico iniciado' || lst.Estado == 'Proceso juridico completado'">
-                                <i (click)="VerInfo(lst.Id)" class="fas fa-check-circle button-grid" style="color: green" tooltipPosition="right" pTooltip="{{ 'Citas_Completado' | translate }}"></i>&nbsp;
+                                <i (click)="VerInfo(lst.id)" class="fas fa-check-circle button-grid" style="color: green" tooltipPosition="right" pTooltip="{{ 'Citas_Completado' | translate }}"></i>&nbsp;
                             </span>
                         </td>
                     </tr>

@@ -22,6 +22,7 @@ export class ProcesoJuridicoComponent implements OnInit {
   @ViewChild('closeAddExpenseModal') closeAddExpenseModal: ElementRef;
   @ViewChild('openModal') openModal: ElementRef;
 
+  //Variables utilizadas
   msgs: Message[] = [];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -36,12 +37,14 @@ export class ProcesoJuridicoComponent implements OnInit {
     id: "1"
   }
 
+  //Constructor
   constructor(private translate: TranslateService,
     private router: Router,
     private globals: Globals,
     private confirmationService: ConfirmationService,
     private RequestService: UtilService) { }
 
+    //Inicialización del formulario
   ngOnInit() {
     this.translate.get('Citas_Mensaje_Confirmacion_Borrar').subscribe(msg => {
       this.globals.MensajeConfirmBorrado = msg;
@@ -85,7 +88,7 @@ export class ProcesoJuridicoComponent implements OnInit {
       });
     });
   }
-  //Método para consultar los usuarios registrados
+  //Método para consultar las facturas para realizar proceso jurídico
   getTables(): void {
     
     this.RequestService.httpRequest('POST', 'http://localhost:1024/servicesREST/Factura/FacturasProceso', this.body, null).subscribe(
@@ -120,17 +123,20 @@ export class ProcesoJuridicoComponent implements OnInit {
   getInfoModal(): void {
   }
 
+  //Mensaje general de error
   msgError(error): void {
     this.msgs = [];
     var msg = format(this.globals.MsgError, error);
     this.msgs.push({ severity: 'error', summary: this.globals.TituloMsgError, detail: msg });
   }
 
+  //Mostrar mensaje cargando
   showLoading(msg): void {
     $('#Loading').find('.loaderText').find('h4').html(msg);
     $('#Loading').fadeIn();
   }
 
+  //Esconder mensaje cargando
   hideLoading(): void {
     $('#Loading').find('.loaderText').find('h4').html('');
     $('#Loading').fadeOut();
@@ -153,12 +159,14 @@ export class ProcesoJuridicoComponent implements OnInit {
     this.floatlabels.rebuild();
   }
 
+  //Metodo para abrir el formulario para crear un nuevo proceso jurídico
   crearProceso(idFactura: string): void {
     this.proceso.idFactura = idFactura;
     this.floatlabels.rebuild();
     this.openModal.nativeElement.click();
   }
 
+  //Metodo para abrir el formulario de editar el proceso jurídico
   editProcesos(idFactura: number): void {
     this.RequestService.httpRequest('POST', 'http://localhost:1024/servicesREST/Factura/Proceso', idFactura, null).subscribe(
       response => {
@@ -176,6 +184,7 @@ export class ProcesoJuridicoComponent implements OnInit {
     
   }
 
+  //Metodo para editar el proceso jurídico
   Editar(): void {
     $('.requiered').change();
 

@@ -64,6 +64,15 @@ export class ReportesComponent implements OnInit {
     data.forEach(element => {
       const item = { label: '', value: 0 };
       const pos = this.searchItem(element.idCliente, dataSinMora);
+
+      if (this.enMora(element.fecha)) {
+        if (!element.estado.includes('(Mora)')) {
+          element.estado = element.estado + ' (Mora)';
+        }
+        dataConReport[0].B += 1;
+      } else {
+        dataConReport[0].A += 1;
+      }
       if (pos !== -1) {
         dataSinMora[pos].value += +element.valor;
       } else {
@@ -72,11 +81,7 @@ export class ReportesComponent implements OnInit {
         dataSinMora.push(item);
       }
 
-      if (this.enMora(element.fecha)) {
-        dataConReport[0].B += 1;
-      } else {
-        dataConReport[0].A += 1;
-      }
+    
 
     });
     this.dataConReport = dataConReport;

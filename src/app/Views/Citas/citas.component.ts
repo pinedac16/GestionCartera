@@ -312,13 +312,14 @@ export class CitasComponent implements OnInit {
     }
 
     var Objetivo = $("#txtObjetivo").val().toString();
+    var Observaciones = $("#txtObservaciones").val().toString();
     var Fecha = $("#txtFecha").val().toString().replace('T', ' ') + ":00";
    
     this.cita.id = 0;
     this.cita.objetivo = Objetivo;
     this.cita.fecha = Fecha;
     this.cita.resultado = "";
-    this.cita.observaciones = "";
+    this.cita.observaciones = Observaciones;
     
     console.log(this.cita);
     this.translate.get('Citas_Creando_cita').subscribe(msg => {

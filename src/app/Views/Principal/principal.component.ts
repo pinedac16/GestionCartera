@@ -29,12 +29,8 @@ export class PrincipalComponent implements OnInit {
 
   }
 
-  getManual(): void{
-    window.open('assets/doc/Plantilla_Resumen.docx', '_blank');
-  }
-
   getDocumentacion(): void {
-    window.open('assets/doc/Plantilla_Resumen.docx', '_blank');
+    window.open('assets/Doc/PRESENTACION.pptx', '_blank');
   }
 
   
