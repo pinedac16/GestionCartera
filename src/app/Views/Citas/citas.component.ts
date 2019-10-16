@@ -10,6 +10,7 @@ import { ConfirmationService } from 'primeng/api';
 import { format } from 'util';
 import { CitasService } from "../../Services/Citas/citas.service";
 import { UtilService } from '../../Services/Util/util.service';
+import { Paths } from '../../class/const/paths';
 
 declare var FloatLabels: any;
 
@@ -19,7 +20,6 @@ declare var FloatLabels: any;
   styleUrls: ['./citas.component.css']
 })
 export class CitasComponent implements OnInit {
-
   @ViewChild('closeAddExpenseModal') closeAddExpenseModal: ElementRef;
   @ViewChild('closeAddExpenseModalSeg') closeAddExpenseModalSeg: ElementRef;
   @ViewChild('closeAddExpenseModalCom') closeAddExpenseModalCom: ElementRef;
@@ -104,8 +104,7 @@ export class CitasComponent implements OnInit {
 
   //Método para consultar los usuarios registrados
   getTables(): void {
-    
-    this.RequestService.httpRequest('POST', 'http://localhost:1024/servicesREST/Factura/allFactura', this.body, null).subscribe(
+    this.RequestService.httpRequest('POST', `${Paths.URL}/Factura/allFactura`, this.body, null).subscribe(
       response => {
         let facturas: Factura[] = [];
         console.log(response.body)
@@ -208,7 +207,7 @@ export class CitasComponent implements OnInit {
     this.translate.get('Citas_Creando_resultado').subscribe(msg => {
       this.showLoading(msg);
     });
-    this.RequestService.httpRequest('POST', 'http://localhost:1024/servicesREST/Factura/completadoCita', this.cita, null).subscribe(
+    this.RequestService.httpRequest('POST', `${Paths.URL}/Factura/completadoCita`, this.cita, null).subscribe(
       response => {
         this.translate.get('Citas_Exito_Crear_resultado').subscribe(msg => {
           this.msgs = [];
@@ -249,7 +248,7 @@ export class CitasComponent implements OnInit {
     this.translate.get('Citas_Actualizando_cita').subscribe(msg => {
       this.showLoading(msg);
     });
-    this.RequestService.httpRequest('POST', 'http://localhost:1024/servicesREST/Factura/updateCita', this.cita, null).subscribe(
+    this.RequestService.httpRequest('POST', `${Paths.URL}/Factura/updateCita`, this.cita, null).subscribe(
       response => {
         this.translate.get('Citas_Exito_Actualizando_Cita').subscribe(msg => {
           this.msgs = [];
@@ -273,7 +272,7 @@ export class CitasComponent implements OnInit {
   }
 
   VerInfo(idFactura: string) : void {
-    this.RequestService.httpRequest('POST', 'http://localhost:1024/servicesREST/Factura/Cita', idFactura, null).subscribe(
+    this.RequestService.httpRequest('POST', `${Paths.URL}/Factura/Cita`, idFactura, null).subscribe(
       response => {
         console.log(response.body.fecha.replace(':00.0', '').replace(' ', 'T'));
         $('#txtFechaCom').val(response.body.fecha.replace(':00.0', '').replace(' ', 'T'));
@@ -309,7 +308,7 @@ export class CitasComponent implements OnInit {
     this.translate.get('Citas_Creando_cita').subscribe(msg => {
       this.showLoading(msg);
     });
-    this.RequestService.httpRequest('POST', 'http://localhost:1024/servicesREST/Factura/newcita', this.cita, null).subscribe(
+    this.RequestService.httpRequest('POST', `${Paths.URL}/Factura/newcita`, this.cita, null).subscribe(
       response => {
         this.translate.get('Citas_Exito_Crear_Cita').subscribe(msg => {
           this.msgs = [];
@@ -333,7 +332,7 @@ export class CitasComponent implements OnInit {
   }
 
   editCitas(idFactura: number): void {
-    this.RequestService.httpRequest('POST', 'http://localhost:1024/servicesREST/Factura/Cita', idFactura, null).subscribe(
+    this.RequestService.httpRequest('POST', `${Paths.URL}/Factura/Cita`, idFactura, null).subscribe(
       response => {
         console.log(response.body.fecha.replace(':00.0', '').replace(' ', 'T'));
         $('#txtFecha').val(response.body.fecha.replace(':00.0', '').replace(' ', 'T'));
@@ -351,7 +350,7 @@ export class CitasComponent implements OnInit {
   }
 
   crearResultado(idFactura: string):void {
-    this.RequestService.httpRequest('POST', 'http://localhost:1024/servicesREST/Factura/Cita', idFactura, null).subscribe(
+    this.RequestService.httpRequest('POST', `${Paths.URL}/Factura/Cita`, idFactura, null).subscribe(
       response => {
         console.log(response.body.fecha.replace(':00.0', '').replace(' ', 'T'));
         $('#txtFechaSeg').val(response.body.fecha.replace(':00.0', '').replace(' ', 'T'));
