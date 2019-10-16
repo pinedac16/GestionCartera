@@ -1,0 +1,38 @@
+<div class="container">
+
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="isError">
+    <strong>Error</strong> falla en al autenticación.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <br>
+
+  <span>
+    <h4>
+      <p> {{ 'Principal_Titulo_1' | translate }}  </p>
+    </h4>
+    <h6>
+      <p> Por favor ingrese su usuario y Contraseña para continuar.</p>
+    </h6>
+  </span>
+
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Usuario:</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" name="username" [(ngModel)]="username" aria-describedby="emailHelp"
+        placeholder="Usuario">
+
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Contraseña:</label>
+      <input type="password" class="form-control" name="password" [(ngModel)]="password" id="exampleInputPassword1" placeholder="Contraseña ">
+    </div>
+    <br>
+    <button type="submit" (click)="login()" class="btn btn-primary" [disabled]="isLoading">Enviar</button>
+  </form>
+
+  <div class="col-md-12" *ngIf="isLoading">&nbsp;
+    <div id="spLoading" class="loader2"></div>
+  </div>
+</div>

@@ -28,6 +28,8 @@ import { CitasComponent } from './Views/Citas/citas.component';
 import { ReportesComponent } from './Views/Reportes/reportes.component';
 import { InformesComponent } from './Views/Informes/informes.component';
 import { ChartsModule } from './modules/charts/charts.module';
+import { LoginComponent } from './Views/login/login.component';
+import { LogoutComponent } from './Views/logout/logout.component';
 import { ProcesoJuridicoComponent } from './Views/ProcesoJuridico/proceso-juridico.component';
 
 
@@ -40,6 +42,11 @@ export function HttpLoaderFactory(http: HttpClient) {
 enableProdMode();
 
 const routes: Routes = [
+
+  {
+    path: 'Login',
+    component: LoginComponent
+  },
   {
     path: 'Principal',
     component: PrincipalComponent
@@ -57,12 +64,21 @@ const routes: Routes = [
     component: ReportesComponent
   },
   {
+    path: 'Logout',
+    component: LogoutComponent
+  },
+  {
     path: 'Informes',
     component: InformesComponent
   },
   {
     path: 'Procesos',
     component: ProcesoJuridicoComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'Login',
+    pathMatch: 'full'
   }
 ];
 
@@ -74,6 +90,8 @@ const routes: Routes = [
     CitasComponent,
     ReportesComponent,
     InformesComponent,
+    LoginComponent,
+    LogoutComponent,
     ProcesoJuridicoComponent
   ],
   imports: [

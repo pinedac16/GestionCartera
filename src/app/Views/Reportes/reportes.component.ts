@@ -2,6 +2,8 @@ import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 import { UtilService } from '../../Services/Util/util.service';
 import { Paths } from '../../class/const/paths';
+import { Router } from '../../../../node_modules/@angular/router';
+import { CargaService } from '../../Services/Carga/carga.service';
 
 @Component({
   selector: 'app-reportes',
@@ -21,10 +23,15 @@ export class ReportesComponent implements OnInit {
   dataSinMora = [];
 
   constructor(
+    private router: Router,
+    private carga: CargaService,
     private RequestService: UtilService
   ) { }
 
   ngOnInit() {
+    if (!this.carga.isLogin) {
+      this.router.navigate(['/Login']);
+    }
     this.isLoading = true;
     this.getData();
     this.clearInput();
@@ -102,7 +109,7 @@ export class ReportesComponent implements OnInit {
 
 
   filterItem(index) {
-    this.clearInput()
+    this.clearInput();
     this.isGrafig = false;
     this.dataFilter = [];
     this.dataConReport = [];

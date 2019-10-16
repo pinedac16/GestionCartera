@@ -35,7 +35,7 @@
   <!--Barra del Menú-->
   <div class="barra-menu">
     <div class="container">
-      <p-menubar [model]="items" [autoDisplay]="false"></p-menubar>
+      <p-menubar [model]="items" [autoDisplay]="false" *ngIf="carga.isLogin" ></p-menubar>
     </div>
   </div>
 </header>
