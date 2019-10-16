@@ -7,12 +7,13 @@ import { ViewChild, ElementRef } from '@angular/core';
 import { FileUpload } from 'primeng/fileupload';
 import { ConfirmationService } from 'primeng/api';
 import { Globals } from '../../../globals';
-import { Factura } from '../../Models/General';
+import { Factura, Cliente } from '../../Models/General';
 import { format } from 'util';
 import { CargaService } from '../../Services/Carga/carga.service';
 import { UtilService } from '../../Services/Util/util.service';
 import * as XLSX from 'xlsx';
 import { ReadVarExpr } from '@angular/compiler';
+import { Paths } from '../../class/const/paths';
 
 declare var FloatLabels: any;
 
@@ -30,7 +31,9 @@ export class CargaComponent implements OnInit {
   arrayBuffer: any;
   data: any;
   ListaFacturas: Factura[];
+  clientes: Cliente[];
   errorCarga: boolean;
+  nombre: String;
   body = {
     nit: "1"
   }
@@ -84,14 +87,14 @@ export class CargaComponent implements OnInit {
               fecha: this.data[i][2],
               descripcion: this.data[i][3],
               valor: this.data[i][4],
-              idCliente: "1",
+              idCliente: this.data[i][1],
               Pago: "No",
               Estado: "Sin cita"
             }
             facturas.push(Factura);
         }
         else {
-          this.MsgError();
+          this.MsgError("La estructura del archivo es incorrecta en la fila " + (i+1));
           return;
         }
       }
@@ -104,9 +107,9 @@ export class CargaComponent implements OnInit {
     
   }
 
-  MsgError(): void {
+  MsgError(msg: string): void {
     this.confirmationService.confirm({
-      message: 'Estructura del archivo incorrecta',
+      message: msg,
       header: 'Error',
       icon: 'fas fa-info-circle',
       acceptLabel: 'Aceptar',
@@ -119,8 +122,24 @@ export class CargaComponent implements OnInit {
     
   }
 
-  Registrar(): void {
+  MsgExito(msg: string): void {
+    this.confirmationService.confirm({
+      message: msg,
+      header: 'Satisfactorio',
+      icon: 'fas fa-info-circle',
+      acceptLabel: 'Aceptar',
+      rejectVisible: false,
+      accept: () => {
+        
+      }
+    });
+    this.clear();
+    
+  }
 
+
+  Registrar(): void {
+    var error: boolean = false;
     for(var i = 0; i < this.ListaFacturas.length; i++) {
       var factura: Factura = {
         id: 0,
@@ -132,21 +151,24 @@ export class CargaComponent implements OnInit {
         Pago: this.ListaFacturas[i].Pago,
         Estado: this.ListaFacturas[i].Estado
       }
-      console.log(factura);
-      this.RequestService.httpRequest('POST', 'http://localhost:1024/servicesREST/Factura/newFactura', factura, null).subscribe(
+      this.RequestService.httpRequest('POST',  `${Paths.URL}/Factura/newFactura`, factura, null).subscribe(
       response => {
-        console.log(response);
+        if(response.body != "Ok") {
+          error = true;
+        }
       },
       error => {
         console.log('error', error);
       });
     }
+    if(error) {
+      this.MsgError("Se ha producido un error al cargar los datos");
+    }
+    else {
+      this.MsgExito("Se han cargado las facturas correctamente.");
+    }
     
-  }
-
-  validateFile(): void {
-    console.log("Entró a validate");
-    this.MsgError();
+    
   }
 
   //Método para limpiar el formulario modal
@@ -195,7 +217,7 @@ export class CargaComponent implements OnInit {
   }
 
   getTemplate(): void{
-    window.open('assets/doc/Plantilla_Resumen.docx', '_blank');
+    window.open('assets/Doc/Facturas.xlsx', '_blank');
   }
 
 }

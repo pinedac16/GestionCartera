@@ -12,7 +12,7 @@ export class ReportesComponent implements OnInit {
 
   isLoading = false;
   isGrafig = false;
-  titles = ['id', 'idCliente', 'numeroFactura', 'fecha', 'descripcion', 'valor', 'estado'];
+  titles = ['id', 'idCliente', 'numero', 'fecha', 'descripcion', 'valor', 'estado'];
   valueInpiut = [];
   data = [];
   dataFilter = [];

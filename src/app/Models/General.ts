@@ -23,12 +23,12 @@ export class Usuarios {
 }
 
 export class Cliente {
-    Id: number;
-    NIT: string;
-    Nombre: string;
-    Direccion: string;
-    Telefono: string;
-    Municipio: string;
+    id: number;
+    nit: string;
+    nombre: string;
+    direccion: string;
+    telefono: string;
+    municipio: string;
 }
 
 export class Cita {
