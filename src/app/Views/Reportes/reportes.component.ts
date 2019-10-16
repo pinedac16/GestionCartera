@@ -1,5 +1,7 @@
 import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
+import { UtilService } from '../../Services/Util/util.service';
+import { Paths } from '../../class/const/paths';
 
 @Component({
   selector: 'app-reportes',
@@ -8,58 +10,49 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportesComponent implements OnInit {
 
-  data = [
-    {
-      'id': 1,
-      'numeroFactura': '4131',
-      'fecha': '2019-10-10',
-      'descripcion': 'compra 1',
-      'valor': '500000',
-      'idCliente': 'empresa 1',
-      'estado': 'Con cita'
-    },
-    {
-      'id': 2,
-      'numeroFactura': '92848',
-      'fecha': '2019-10-11',
-      'descripcion': 'compra 2',
-      'valor': '600000',
-      'idCliente': 'empresa2',
-      'estado': 'Sin cita'
-    },
-    {
-      'id': 3,
-      'numeroFactura': '91111',
-      'fecha': '2019-10-11',
-      'descripcion': 'compra 2',
-      'valor': '50000',
-      'idCliente': 'empresa 1',
-      'estado': 'Sin cita'
-    },
-    {
-      'id': 4,
-      'numeroFactura': '91111',
-      'fecha': '2019-10-11',
-      'descripcion': 'compra 2',
-      'valor': '50000',
-      'idCliente': 'empresa 5',
-      'estado': 'report'
-    }
-  ];
+  isLoading = false;
+  isGrafig = false;
+  titles = ['id', 'idCliente', 'numeroFactura', 'fecha', 'descripcion', 'valor', 'estado'];
+  valueInpiut = [];
+  data = [];
+  dataFilter = [];
+  dataConReport = [];
 
-  dataConReport = [ ];
+  dataSinMora = [];
 
-  dataSinMora = [ ];
-
-  constructor() { }
+  constructor(
+    private RequestService: UtilService
+  ) { }
 
   ngOnInit() {
-    this.sinMora(this.data);
+    this.isLoading = true;
+    this.getData();
+    this.clearInput();
+
+  }
+
+  getData() {
+    this.RequestService.httpRequest('POST', `${Paths.URL}/Factura/allFactura`, {}, null)
+      .subscribe(
+        response => {
+          this.data = response.body;
+          this.dataFilter = this.data;
+          this.sinMora(this.data);
+
+          console.log();
+          this.isLoading = false;
+          this.isGrafig = true;
+        },
+        error => {
+          console.log(error);
+          this.isLoading = false;
+        }
+      );
   }
 
   sinMora(data: any) {
     const dataSinMora = [];
-    const dataConReport = [{label: 'Clientes', A: 0, B: 0 }];
+    const dataConReport = [{ label: 'Clientes', A: 0, B: 0 }];
 
     data.forEach(element => {
       const item = { label: '', value: 0 };
@@ -72,7 +65,7 @@ export class ReportesComponent implements OnInit {
         dataSinMora.push(item);
       }
 
-      if (element.estado === 'report') {
+      if (this.enMora(element.fecha)) {
         dataConReport[0].B += 1;
       } else {
         dataConReport[0].A += 1;
@@ -81,6 +74,20 @@ export class ReportesComponent implements OnInit {
     });
     this.dataConReport = dataConReport;
     this.dataSinMora = dataSinMora;
+  }
+
+  enMora(date) {
+    const dateN = new Date(date);
+    const fechaFac = dateN.setDate(dateN.getDate() + 90);
+
+    if (new Date().getTime() > fechaFac) {
+      console.log(true);
+      return true;
+    } else {
+      console.log(false);
+      return false;
+    }
+
   }
 
   searchItem(item, arr: any) {
@@ -92,6 +99,30 @@ export class ReportesComponent implements OnInit {
     });
     return found;
   }
+
+
+  filterItem(index) {
+    this.clearInput()
+    this.isGrafig = false;
+    this.dataFilter = [];
+    this.dataConReport = [];
+    this.dataSinMora = [];
+    this.dataFilter = this.data.filter(
+      item => `${item[this.titles[index]]}`.toLowerCase().indexOf(this.valueInpiut[index].toLowerCase()) > -1
+    );
+
+    this.sinMora(this.dataFilter);
+    setTimeout(() => {
+      this.isGrafig = true;
+    }, 1000);
+  }
+
+  clearInput(){
+
+    this.valueInpiut.forEach(element => {
+      element = '';    });
+  }
+
 
 
 
