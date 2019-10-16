@@ -1,4 +1,15 @@
 {
+    "report":{
+        "title_bar1":"Customer Charge",
+        "title_bar2":"Late payment by customers",
+        "idCliente":"Client",
+        "numeroFactura":"Bill number",
+        "fecha":"Date",
+        "descripcion":"Description",
+        "valor":"Value",
+        "estado":"State"
+
+    },
     "Principal_Titulo_1": "WELCOME TO CALCULOS",
     "Principal_Titulo_2": "The Poli program to calculate the Average, Fashion, Median and Standard deviation of your data",
     "Principal_form_Numero": "Number",

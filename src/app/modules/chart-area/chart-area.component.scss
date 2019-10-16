@@ -1,0 +1,38 @@
+
+.chart-container {
+    position: relative;
+    vertical-align: middle;
+  }
+  
+  /**
+   * Alter legend with circle icons
+   * Supported by js logic to set this
+   */
+  .chart-legend-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 1.5em;
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+  
+    .chart-legend {
+      display: inline-block;
+      font-size: 14px;
+      margin-right: 1em;
+  
+      .bullet-icon-legend{
+        &:before {
+          content: ' \25CF'
+        }
+      }
+    }
+  }
+  
+  
+  @media screen and (max-aspect-ratio: 13/9) {
+  
+    .chart-legend-container {
+      margin-top: 1em;
+    }
+  
+  }

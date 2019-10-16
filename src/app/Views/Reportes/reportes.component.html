@@ -1,3 +1,44 @@
-<p>
-  reportes works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <h3>{{ 'report.title_bar1' | translate }}</h3>
+      <app-bar-chart [width]="500" [height]="400" [data]="dataSinMora" [yOffset]="true" >
+      </app-bar-chart>
+    </div>
+    <div class="col-12 col-md-6">
+      <h3>{{ 'report.title_bar2' | translate }}</h3>
+      <app-bar-chart-stacked [width]="500" [height]="400" [data]="dataConReport" [yOffset]="false"  [legend]="['Cobro', 'En mora']">
+      </app-bar-chart-stacked>
+    </div>
+  </div>
+
+  <!-- tabla de datos   -->
+  <br>
+  <h3>Reporte General de los clientes</h3>
+  <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{ 'report.idCliente' | translate }}</th>
+          <th scope="col">{{ 'report.numeroFactura' | translate }}</th>
+          <th scope="col">{{ 'report.fecha' | translate }}</th>
+          <th scope="col">{{ 'report.descripcion' | translate }}</th>
+          <th scope="col">{{ 'report.valor' | translate }}</th>
+          <th scope="col">{{ 'report.estado' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data">
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.idCliente}}</td>
+          <td>{{item.numeroFactura}}</td>
+          <td>{{item.fecha}}</td>
+          <td>{{item.descripcion}}</td>
+          <td>{{item.valor | currency}}</td>
+          <td>{{item.estado}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+</div>

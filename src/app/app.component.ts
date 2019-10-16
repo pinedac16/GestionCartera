@@ -91,7 +91,8 @@ export class AppComponent {
           { label: msg, routerLink: '/Principal'},
           { label: this.translate.instant('Menu_Carga'), routerLink: '/Carga' },
           { label: this.translate.instant('Menu_Reportes'), routerLink: '/Reportes' },
-          { label: this.translate.instant('Menu_Citas'), routerLink: '/Citas' }
+          { label: this.translate.instant('Menu_Citas'), routerLink: '/Citas' },
+          { label: this.translate.instant('Menu_Procesos'), routerLink: '/Procesos' }
         ];
     });
   }
@@ -100,6 +101,7 @@ export class AppComponent {
   getTraducsPpal(): void {
     this.translate.get('General_Titulo_Success').subscribe(msg => {
       this.globals.TituloMsgSuccess = msg;
+      this.globals.TituloMsgError = this.translate.instant('General_Titulo_Error');
     });
   }
 

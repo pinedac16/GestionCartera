@@ -1,4 +1,14 @@
 {
+    "report":{
+        "title_bar1":"Cobro por clientes",
+        "title_bar2":"Cobro mora por clientes",
+        "idCliente":"Cliente",
+        "numeroFactura":"Número Factura",
+        "fecha":"Fecha",
+        "descripcion":"Descripción",
+        "valor":"Valor",
+        "estado":"Estado"
+    },
     "Principal_Titulo_1": "BEM-VINDOS A CALCULOS",
     "Principal_Titulo_2": "O programa Poli para calcular a Média, Moda, Mediana e Desvio padrão dos seus dados",
     "Principal_form_Numero": "Número",

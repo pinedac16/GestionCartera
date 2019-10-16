@@ -1,0 +1,71 @@
+
+.d3-chart {
+  &.d3-bar-chart {
+    .d3-chart {
+
+      text {
+        font-size: 12px;
+      }
+
+      g#limit-group {
+        line {
+          stroke: #B4B4B4;
+          stroke-width: 2;
+          stroke-dasharray: 4 2;
+        }
+        circle {
+          fill: #5DC691;
+        }
+      }
+
+      .d3-tooltip {
+        path {
+          fill: #58595B;
+        }
+        text {
+          fill: white;
+          dominant-baseline: middle;
+        }
+      }
+
+      .d3-axis {
+        text {
+          fill: #B4B4B4;
+        }
+        &.y path {
+          stroke-width: 0;
+        }
+        &.x {
+          line.bottom-line {
+            stroke: #808285;
+          }
+          path {
+            stroke-width: 0;
+          }
+        }
+        .tick {
+          line {
+            stroke-width: 0;
+          }
+        }
+      }
+
+      .d3-grid {
+        path {
+          stroke-width: 0;
+        }
+        .tick line {
+          stroke: #F0F0F0;
+        }
+      }
+    }
+
+    text.d3-title {
+      fill: #00448C;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+  }
+
+}

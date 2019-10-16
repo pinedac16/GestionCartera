@@ -6,6 +6,8 @@ import { Message } from 'primeng/components/common/api';
 import { ViewChild, ElementRef } from '@angular/core';
 import { FileUpload } from 'primeng/fileupload';
 import { ConfirmationService } from 'primeng/api';
+import { Globals } from '../../../globals';
+import { Factura } from '../../Models/General';
 import { format } from 'util';
 import { CargaService } from '../../Services/Carga/carga.service';
 import { UtilService } from '../../Services/Util/util.service';
@@ -27,6 +29,8 @@ export class CargaComponent implements OnInit {
   floatlabels: any;
   arrayBuffer: any;
   data: any;
+  ListaFacturas: Factura[];
+  errorCarga: boolean;
   body = {
     nit: "1"
   }
@@ -35,6 +39,7 @@ export class CargaComponent implements OnInit {
   constructor(private cargaService: CargaService,
     private translate: TranslateService,
     private router: Router,
+    private globals: Globals,
     private confirmationService: ConfirmationService,
     private RequestService: UtilService) { }
 
@@ -70,16 +75,78 @@ export class CargaComponent implements OnInit {
       const wsname: string = wb.SheetNames[0];
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
       this.data = (XLSX.utils.sheet_to_json(ws, {header: 1}));
-      console.log(this.data);
+      let facturas: Factura[] = [];
+      for(var i = 1; i < this.data.length; i++) {
+        if(this.data[i].length == 5) {
+            var Factura: Factura = {
+              id: 0,
+              numero: this.data[i][0],
+              fecha: this.data[i][2],
+              descripcion: this.data[i][3],
+              valor: this.data[i][4],
+              idCliente: "1",
+              Pago: "No",
+              Estado: "Sin cita"
+            }
+            facturas.push(Factura);
+        }
+        else {
+          this.MsgError();
+          return;
+        }
+      }
+      this.ListaFacturas = facturas;
+      this.Registrar();
     };
     fileReader.readAsBinaryString(this.fileUpload.files[0]);
     
-    this.save();
+    
+    
+  }
+
+  MsgError(): void {
+    this.confirmationService.confirm({
+      message: 'Estructura del archivo incorrecta',
+      header: 'Error',
+      icon: 'fas fa-info-circle',
+      acceptLabel: 'Aceptar',
+      rejectVisible: false,
+      accept: () => {
+        
+      }
+    });
+    this.clear();
+    
+  }
+
+  Registrar(): void {
+
+    for(var i = 0; i < this.ListaFacturas.length; i++) {
+      var factura: Factura = {
+        id: 0,
+        numero: this.ListaFacturas[i].numero,
+        fecha: this.ListaFacturas[i].fecha,
+        descripcion: this.ListaFacturas[i].descripcion,
+        valor: this.ListaFacturas[i].valor,
+        idCliente: this.ListaFacturas[i].idCliente,
+        Pago: this.ListaFacturas[i].Pago,
+        Estado: this.ListaFacturas[i].Estado
+      }
+      console.log(factura);
+      this.RequestService.httpRequest('POST', 'http://localhost:1024/servicesREST/Factura/newFactura', factura, null).subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log('error', error);
+      });
+    }
     
   }
 
   validateFile(): void {
-    
+    console.log("Entró a validate");
+    this.MsgError();
   }
 
   //Método para limpiar el formulario modal

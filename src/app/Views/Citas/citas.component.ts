@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { from, Subject } from 'rxjs'
+import { from, Subject, observable } from 'rxjs'
 import { Router } from '@angular/router';
 import { Cliente, Cita, Factura } from '../../Models/General';
 import { TranslateService } from '@ngx-translate/core';
@@ -81,8 +81,10 @@ export class CitasComponent implements OnInit {
       this.translate.get('Citas_modal_Fecha').subscribe(trans => {
         $('#lblFecha').html(trans);
         $('#lblObjetivo').html(this.translate.instant('Citas_modal_Objetivo'));
+        $('#lblObservaciones').html(this.translate.instant('Citas_modal_Observaciones'));
         $('#lblFechaSeg').html(this.translate.instant('Citas_modal_Fecha'));
         $('#lblObjetivoSeg').html(this.translate.instant('Citas_modal_Objetivo'));
+        $('#lblObservacionesSeg').html(this.translate.instant('Citas_modal_Observaciones'));
         $('#lblResultado').html(this.translate.instant('Citas_modal_Resutado'));
         this.floatlabels = new FloatLabels('.form-1', {
           style: 1
@@ -112,12 +114,13 @@ export class CitasComponent implements OnInit {
         for (var i = 0; i < response.body.length; i++) {
           
           var Factura: Factura = {
-            Id: response.body[i].id,
-            Numero: response.body[i].numeroFactura,
-            Fecha: response.body[i].fecha,
-            Descripcion: response.body[i].descripcion,
-            Valor: response.body[i].valor,
-            Cliente: response.body[i].idCliente,
+            id: response.body[i].id,
+            numero: response.body[i].numero,
+            fecha: response.body[i].fecha,
+            descripcion: response.body[i].descripcion,
+            valor: response.body[i].valor,
+            idCliente: response.body[i].idCliente,
+            Pago: "No",
             Estado: response.body[i].estado
           }
           facturas.push(Factura);
@@ -164,6 +167,7 @@ export class CitasComponent implements OnInit {
     this.editCita = false;
     $('#txtFecha').val('');
     $('#txtObjetivo').val('');
+    $('#txtObservaciones').val('');
     
     $('.has-error').hide();
 
@@ -174,6 +178,7 @@ export class CitasComponent implements OnInit {
     this.cita = new Cita();
     $('#txtFechaSeg').val('');
     $('#txtObjetivoSeg').val('');
+    $('#txtObservacionesSeg').val('');
     $('#txtResultado').val('');
     
     $('.has-error').hide();
@@ -196,6 +201,7 @@ export class CitasComponent implements OnInit {
     }
 
     var Objetivo = $("#txtObjetivoSeg").val().toString();
+    var Observaciones = $("#txtObservacionesSeg").val().toString();
     var Fecha = $("#txtFechaSeg").val().toString().replace('T', ' ') + ":00";
     var Resultado = $("#txtResultado").val().toString();
    
@@ -203,6 +209,7 @@ export class CitasComponent implements OnInit {
     this.cita.objetivo = Objetivo;
     this.cita.fecha = Fecha;
     this.cita.resultado = Resultado;
+    this.cita.observaciones = Observaciones;
     
     console.log(this.cita);
     this.translate.get('Citas_Creando_resultado').subscribe(msg => {
@@ -238,12 +245,14 @@ export class CitasComponent implements OnInit {
     }
 
     var Objetivo = $("#txtObjetivo").val().toString();
+    var Observaciones = $("#txtObservaciones").val().toString();
     var Fecha = $("#txtFecha").val().toString().replace('T', ' ') + ":00";
    
     this.cita.id = 0;
     this.cita.objetivo = Objetivo;
     this.cita.fecha = Fecha;
     this.cita.resultado = "";
+    this.cita.observaciones = Observaciones;
     
     console.log(this.cita);
     this.translate.get('Citas_Actualizando_cita').subscribe(msg => {
@@ -278,6 +287,7 @@ export class CitasComponent implements OnInit {
         console.log(response.body.fecha.replace(':00.0', '').replace(' ', 'T'));
         $('#txtFechaCom').val(response.body.fecha.replace(':00.0', '').replace(' ', 'T'));
         $('#txtObjetivoCom').val(response.body.objetivo);
+        $('#txtObservacionesCom').val(response.body.observaciones);
         $('#txtResultadoCom').val(response.body.resultado);
         this.cita.idFactura = idFactura.toString();
         this.editCita = true;
@@ -304,6 +314,7 @@ export class CitasComponent implements OnInit {
     this.cita.objetivo = Objetivo;
     this.cita.fecha = Fecha;
     this.cita.resultado = "";
+    this.cita.observaciones = "";
     
     console.log(this.cita);
     this.translate.get('Citas_Creando_cita').subscribe(msg => {
@@ -338,6 +349,7 @@ export class CitasComponent implements OnInit {
         console.log(response.body.fecha.replace(':00.0', '').replace(' ', 'T'));
         $('#txtFecha').val(response.body.fecha.replace(':00.0', '').replace(' ', 'T'));
         $('#txtObjetivo').val(response.body.objetivo);
+        $('#txtObservaciones').val(response.body.observaciones);
         this.cita.idFactura = idFactura.toString();
         this.editCita = true;
         this.floatlabels.rebuild();
@@ -356,6 +368,7 @@ export class CitasComponent implements OnInit {
         console.log(response.body.fecha.replace(':00.0', '').replace(' ', 'T'));
         $('#txtFechaSeg').val(response.body.fecha.replace(':00.0', '').replace(' ', 'T'));
         $('#txtObjetivoSeg').val(response.body.objetivo);
+        $('#txtObservacionesSeg').val(response.body.observaciones);
         this.cita.idFactura = idFactura.toString();
         this.floatlabels.rebuild();
         this.openModalSeg.nativeElement.click();
@@ -371,23 +384,49 @@ export class CitasComponent implements OnInit {
     this.openModalSeg.nativeElement.click();
   }
 
-  deleteCitas(id: number): void {
-    this.confirmationService.confirm({
-      message: this.globals.MensajeConfirmBorrado,
-      header: this.globals.TituloConfirmBorrado,
-      icon: 'fas fa-info-circle',
-      acceptLabel: this.globals.BtnSi,
-      rejectLabel: this.globals.BtnNo,
-      rejectVisible: true,
-      accept: () => {
-        this.translate.get('Citas_Borrando_Cita').subscribe(msg => {
-          this.showLoading(msg);
-        });
-        this.hideLoading();
-      }
-    });
-  }
+  Proceso(): void {
+    $('.requiered').change();
 
+    if(($('.has-error:visible').length) > 0) {
+      return;
+    }
+
+    var Objetivo = $("#txtObjetivoSeg").val().toString();
+    var Observaciones = $("#txtObservacionesSeg").val().toString();
+    var Fecha = $("#txtFechaSeg").val().toString().replace('T', ' ') + ":00";
+    var Resultado = $("#txtResultado").val().toString();
+   
+    this.cita.id = 0;
+    this.cita.objetivo = Objetivo;
+    this.cita.fecha = Fecha;
+    this.cita.resultado = Resultado;
+    this.cita.observaciones = Observaciones;
+    
+    console.log(this.cita);
+    this.translate.get('Citas_Creando_proceso').subscribe(msg => {
+      this.showLoading(msg);
+    });
+    this.RequestService.httpRequest('POST', 'http://localhost:1024/servicesREST/Factura/procesosCita', this.cita, null).subscribe(
+      response => {
+        this.translate.get('Citas_Exito_Crear_proceso').subscribe(msg => {
+          this.msgs = [];
+          this.msgs.push({ severity: 'success', summary: this.globals.TituloMsgSuccess, detail: msg });
+        });
+
+        $('#dvTable').fadeOut();
+        $('#spLoading').fadeIn();
+        $('#tblLista').DataTable().destroy();
+        this.getTables();
+        this.hideLoading();
+
+        this.clearModalFormSeg();
+        this.closeAddExpenseModalSeg.nativeElement.click();
+                
+      },
+      error => {
+        console.log('error', error);
+      });
+  }
 
 
 }

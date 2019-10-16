@@ -1,0 +1,75 @@
+
+.d3-chart {
+  &.d3-bar-chart-stacked {
+    .d3-chart {
+
+      text {
+        font-size: 12px;
+      }
+
+      .d3-tooltip-group {
+        path {
+          fill: #C2C2C2;
+        }
+        text {
+          fill: white;
+          dominant-baseline: middle;
+        }
+      }
+
+      .d3-axis {
+        text {
+          fill: #B4B4B4;
+        }
+        &.y path {
+          stroke-width: 0;
+        }
+        &.x {
+          line.bottom-line {
+            stroke: #808285;
+          }
+          path {
+            stroke-width: 0;
+          }
+        }
+        .tick {
+          line {
+            stroke-width: 0;
+          }
+        }
+      }
+
+      .d3-grid {
+        path {
+          stroke-width: 0;
+        }
+        .tick line {
+          stroke: #F0F0F0;
+        }
+      }
+
+    }
+
+    .d3-legend {
+      text {
+        font-size: 10px;
+        alignment-baseline: middle;
+      }
+      circle {
+        &.primary {
+          fill: #00448C;
+        }
+        &.secondary {
+          fill: #e86861;
+        }
+      }
+    }
+
+    text.d3-title {
+      fill: #00448C;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+  }
+}

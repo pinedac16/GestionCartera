@@ -1,0 +1,89 @@
+<p-growl [(value)]="msgs" life="8000"></p-growl>
+
+<div id="modalProcesos" class="modal fade in" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>
+                        <i class="fas fa-users"></i> {{ 'Citas_Titulo' | translate}}
+                    </span>
+                </h4>
+                <button type="button" (click)="clearModalForm()" class="close" data-dismiss="modal" #closeAddExpenseModal>&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="frmProcesos" class="form-1">
+                    <div >
+                        <label id="lblObservaciones" for="txtObservaciones" class="fl-label" translate>Procesos_modal_Observaciones</label>
+                        <input type="textarea" id='txtObservaciones' name="txtObservaciones" class="fl-input required" />
+                        <p class="has-error">{{ 'General_Msg_Requerido' | translate}}</p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div *ngIf="editProceso">
+                    <button id="btnActualizar" type="button" class="btn btn-ISA" (click)="Editar()">{{ 'Proceso_modal_btnActualizar' | translate}}</button>
+                </div>
+                <div *ngIf="!editProceso">
+                    <button id="btnRegistrar" type="button" class="btn btn-ISA" (click)="Registrar()">{{ 'Proceso_modal_btnRegistrar' | translate}}</button>
+                </div>
+                <button type="button" class="btn btn-danger" (click)="clearModalForm()" data-dismiss="modal" translate>Proceso_modal_btnCancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-confirmDialog></p-confirmDialog>
+
+<div class="container">
+    <div class="row" style="padding-left: 0px">
+        <div class="col-md-5 col-lg-5 col-12">
+            <h3>
+              <i class="fas fa-users"></i> {{'Procesos_Titulo' | translate}}
+            </h3>
+            <p class="text-justify">{{'Procesos_Texto' | translate}}</p>
+        </div>
+        <button #openModal type="button" class="btn btn-ISA" data-toggle="modal" data-target="#modalProcesos"
+            data-backdrop="static" data-keyboard="false" style="display: none"></button>
+        <div class="col-md-7 col-lg-7 col-12">
+                &nbsp;
+            </div>
+        <div class="col-md-12">&nbsp;
+            <div id="spLoading" class="loader2"></div>
+        </div>
+        <div id="dvTable" style="display: none" class="col-md-12">
+            <table id="tblLista" datatable style="width: 100%" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped compact hover">
+                <thead>
+                    <tr>
+                        <th>{{'Citas_tblLista_numeroFac' | translate}}</th>
+                        <th>{{'Citas_tblLista_Cliente' | translate}}</th>
+                        <th>{{'Citas_tblLista_Fecha' | translate}}</th>
+                        <th>{{'Citas_tblLista_Descripcion' | translate}}</th>
+                        <th>{{'Citas_tblLista_Valor' | translate}}</th>
+                        <th>{{'Citas_tblLista_Estado' | translate}}</th>
+                        <th>{{'Citas_tblLista_Acciones' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let lst of ListaFacturas;">
+                        <td>{{lst.numero}}</td>
+                        <td>{{lst.idCliente}}</td>
+                        <td>{{lst.fecha}}</td>
+                        <td>{{lst.descripcion}}</td>
+                        <td>{{lst.valor}}</td>
+                        <td>{{lst.Estado}}</td>
+                        <td style="text-align: center; width: 10%">
+                            <span *ngIf="lst.Estado == 'Proceso juridico iniciado'">
+                                <i (click)="crearProceso(lst.Id)" class="fas fa-edit button-grid" style="color: blue" tooltipPosition="right" pTooltip="{{ 'Proceso_Resultado' | translate }}"></i>&nbsp;
+                            </span>
+                            <span *ngIf="lst.Estado == 'Proceso juridico completado'">
+                                <i (click)="editProcesos(lst.Id)" class="fas fa-edit button-grid" style="color: blue" tooltipPosition="right" pTooltip="{{ 'Proceso_Editar' | translate }}"></i>&nbsp;
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
