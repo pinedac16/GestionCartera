@@ -30,7 +30,7 @@
     "d3": "^5.9.2",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.5.4",
-    "datatables.net": "^1.10.18",
+    "datatables.net": "^1.11.3",
     "datatables.net-buttons": "^1.5.3",
     "datatables.net-buttons-dt": "^1.5.3",
     "datatables.net-dt": "^1.10.20",
